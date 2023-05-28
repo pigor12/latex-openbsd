@@ -10,27 +10,27 @@
 \usepackage{chronology}
 
 \lstset{
-    language=Bash, % Define a linguagem do código como Bash
-    backgroundcolor=\color{black!5}, % Cor de fundo
-    basicstyle=\footnotesize\ttfamily\color{black}, % Estilo básico do texto
-    keywordstyle=\color{blue}, % Estilo das palavras-chave
-    stringstyle=\color{red}, % Estilo das strings
-    commentstyle=\color{green!70!black}, % Estilo dos comentários
-    numbers=none, % Posição dos números de linha
-    numberstyle=\tiny\color{gray}, % Estilo dos números de linha
-    stepnumber=1, % Incremento dos números de linha
-    numbersep=5pt, % Espaçamento dos números de linha
-    showspaces=false, % Mostrar espaços com um sublinhado
-    showstringspaces=false, % Mostrar espaços em strings com um sublinhado
-    showtabs=false, % Mostrar tabulações com um sublinhado
-    frame=single, % Moldura em volta do código
-    rulecolor=\color{black}, % Cor da moldura
-    tabsize=2, % Tamanho da tabulação
-    captionpos=b, % Posição da legenda abaixo do código
-    breaklines=true, % Quebra automática de linha
-    breakatwhitespace=false, % Quebra somente em espaços em branco
-    escapeinside={\%*}{*)}, % Permite adicionar LaTeX dentro do código
-    morekeywords={*,...} % Adicionar mais palavras-chave
+    language=Bash,
+    backgroundcolor=\color{black!5},
+    basicstyle=\footnotesize\ttfamily\color{black},
+    keywordstyle=\color{blue},
+    stringstyle=\color{red},
+    commentstyle=\color{green!70!black},
+    numbers=none,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    frame=single,
+    rulecolor=\color{black},
+    tabsize=2,
+    captionpos=b,
+    breaklines=true,
+    breakatwhitespace=false,
+    escapeinside={\%*}{*)},
+    morekeywords={*,...}
 }
 
 \date{20 de maio de 2023}
@@ -53,10 +53,10 @@
 \end{frame}
 \begin{frame}{O que é o OpenBSD?}
   \begin{itemize}
-    \item OpenBSD é um sistema operacional livre e de código aberto baseado no ramo BSD. \pause
-    \item Destaca-se por sua ênfase em segurança, portabilidade e código limpo. \pause
-    \item Desenvolvido desde 1995 por uma comunidade global liderada por Theo de Raadt. \pause
-    \item Utiliza uma licença permissiva (licença BSD), permitindo modificações e distribuição livre. \pause
+    \item OpenBSD é um sistema operacional livre e de código aberto baseado no ramo BSD.
+    \item Destaca-se por sua ênfase em segurança, portabilidade e código limpo.
+    \item Desenvolvido desde 1995 por uma comunidade global liderada por Theo de Raadt.
+    \item Utiliza uma licença permissiva (licença BSD), permitindo modificações e distribuição livre.
     \item Amplamente adotado em servidores, roteadores, estações de trabalho e dispositivos embarcados.
   \end{itemize}
 \end{frame}
@@ -78,13 +78,13 @@
 \end{frame}
 \begin{frame}{História do OpenBSD}
 \begin{chronology}[5]{1995}{2022}{\textwidth}
-\event[1995]{1995}{Início do desenvolvimento}\pause
-\event[1997]{1997}{OpenBSD Ports}\pause
-\event[1999]{1999}{OpenSSH}\pause
-\event[2002]{2002}{OpenNTPD}\pause
-\event[2005]{2005}{Sshguard}\pause
-\event[2012]{2012}{OpenBSD Foundation}\pause
-\event[2015]{2015}{LibreSSL}\pause
+\event[1995]{1995}{Início do desenvolvimento}
+\event[1997]{1997}{OpenBSD Ports}
+\event[1999]{1999}{OpenSSH}
+\event[2002]{2002}{OpenNTPD}
+\event[2005]{2005}{Sshguard}
+\event[2012]{2012}{OpenBSD Foundation}
+\event[2015]{2015}{LibreSSL}
 \event[2020]{2020}{OpenRSYNC}
 \end{chronology}
 \end{frame}
@@ -160,7 +160,7 @@ Os Ports são uma parte essencial do ecossistema OpenBSD. Eles permitem que os u
 \vspace{0.5cm}
 \begin{lstlisting}
 pigor@gigabyte > $ ssh root@192.168.1.9
-root@192.168.1.9's password:
+root@192.168.1.9`s password:
 [....]
 root@192.168.1.9 > #
 \end{lstlisting}
@@ -343,7 +343,6 @@ H & e & l & l & o & , & P & r & o & p & \textbf{o}                & \textbf{l}  
 \end{frame}
 \begin{frame}
   \frametitle{Bibliografia}
-
   \begin{itemize}
     \item Hartmeier, Daniel, and Systor, AG. "Design and Performance of the OpenBSD Stateful Packet Filter (pf)." In USENIX Annual Technical Conference, FREENIX Track, pp. 171--180, 2002.
     \item Marco-Gisbert, Hector, and Ripoll Ripoll, Ismael. "Address space layout randomization next generation." In Applied Sciences, vol. 9, no. 14, p. 2928, 2019.
