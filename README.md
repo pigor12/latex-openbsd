@@ -19,7 +19,7 @@ A apresentação abrange os seguintes tópicos:
 - Política de "Segurança por padrão"
 - Address Space Layout Randomization (ASLR)
 - Virtualização com o VMM
-- Política W^X (Write XOR Execute)
+- Política W ^ X (Write XOR Execute)
 - Proteção ProPolice
 
 ## Como utilizar

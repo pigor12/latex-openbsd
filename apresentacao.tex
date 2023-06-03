@@ -1,6 +1,7 @@
 \documentclass[9pt,xcolor=table]{beamer}
 \usetheme{Warsaw}
 
+\usepackage{tikz}
 \usepackage{xcolor}
 \usepackage{xltxtra}
 \usepackage{dirtree}
@@ -8,6 +9,7 @@
 \usepackage{listings}
 \usepackage{graphicx}
 \usepackage{chronology}
+\usetikzlibrary{shapes, arrows}
 
 \lstset{
     language=Bash,
@@ -37,7 +39,7 @@
 \title{OpenBSD: Segurança e Inovação em SOs}
 \institute[PUC]{Pontifícia Universidade Católica de Minas Gerais}
 \logo{\includegraphics[width=0.7cm]{imagens/logo_pucminas.png}}
-\author[Gustavo, Hernane, João Víctor, Pedro]{Gustavo Valadares \and Hernane Rosa \and João Martins \and Pedro Igor}
+\author[Gustavo Valadares, Hernane Rosa, João Víctor, Pedro Igor]{Gustavo Valadares \and Hernane Rosa \and João Martins \and Pedro Igor}
 
 \begin{document}
 
@@ -47,8 +49,8 @@
 \begin{frame}{Introdução}
   \begin{itemize}
     \item O que é o OpenBSD?
-    \item Breve histórico do projeto
-    \item Objetivos do OpenBSD
+    \item Breve histórico do projeto;
+    \item Objetivos do OpenBSD.
   \end{itemize}
 \end{frame}
 \begin{frame}{O que é o OpenBSD?}
@@ -63,18 +65,57 @@
 \begin{frame}{O que é o OpenBSD?}
     \begin{columns}
         \begin{column}{0.3\textwidth}
+            \begin{figure}
             \centering
             \includegraphics[width=\textwidth]{imagens/openbsd-fan.jpg}
+            \caption{\textit{Fanart}}
+            \end{figure}
         \end{column}
         \begin{column}{0.3\textwidth}
+            \begin{figure}
             \centering
             \includegraphics[width=\textwidth]{imagens/banner-openbsd.png}
+            \caption{Pôster}
+            \end{figure}
         \end{column}
         \begin{column}{0.3\textwidth}
+            \begin{figure}
             \centering
             \includegraphics[width=\textwidth]{imagens/openbsd-poster.jpg}
+            \caption{Capa de DVD}
+            \end{figure}
         \end{column}
     \end{columns}
+\end{frame}
+\begin{frame}
+\frametitle{Instalação do OpenBSD}
+\begin{figure}
+\centering
+\begin{tikzpicture}[node distance = 3cm, auto]
+
+\tikzstyle{startstop} = [rectangle, rounded corners, text centered, draw=black, fill=orange!30]
+\tikzstyle{process} = [rectangle, text centered, draw=black, fill=blue!20]
+\tikzstyle{decision} = [diamond, text centered, draw=black, fill=green!30]
+\tikzstyle{error} = [trapezium, draw, text centered, trapezium left angle=60, trapezium right angle=120, fill=red!10]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+\node (start) [startstop] {ISO};
+\node (media) [process, right of=start] {Mídia USB};
+\node (boot) [decision, below of=media] {Boot};
+\node (inst) [startstop, left of=boot] {Instalação};
+\node (config) [process, left of=inst] {Configuração};
+\node (finish) [process, above of=config] {Fim};
+\node (erro) [error, below of=boot] {Erro};
+
+\draw [arrow] (start) -- (media);
+\draw [arrow] (media) -- (boot);
+\draw [arrow] (config) -- (finish);
+\draw [arrow] (boot) -- (inst);
+\draw [arrow] (inst) -- (config);
+\draw [arrow,dashed] (inst) -- (erro);
+\draw [arrow,dashed] (erro) -- (boot);
+\end{tikzpicture}
+\end{figure}
 \end{frame}
 \begin{frame}{História do OpenBSD}
 \begin{chronology}[5]{1995}{2022}{\textwidth}
@@ -88,6 +129,19 @@
 \event[2020]{2020}{OpenRSYNC}
 \end{chronology}
 \end{frame}
+\begin{frame}[fragile]
+\frametitle{Gerenciamento Seguro de Usuários no OpenBSD}
+\justifying
+O gerenciamento de usuários é semelhante aos demais sistemas operacionais Unix, ou seja, é possível determinar nome, \verb|groups|, ID, permissões, regras de pastas etc.
+\begin{lstlisting}
+root@openbsd > $ useradd -m pigor               # Criação.
+root@openbsd > $ passwd                         # Alterar senha.
+root@openbsd > $ usermod -c "Pedro Igor" pigor  # Atualizar informações.
+root@openbsd > $ id pigor                       # Imprimir informações.
+root@openbsd > $ userdel pigor                  # Remoção
+\end{lstlisting}
+\end{frame}
+
 \begin{frame}[fragile]
 \frametitle{Introdução ao OpenBSD Ports}
 \justifying
@@ -118,7 +172,7 @@ Cada \textbf{port} é essencialmente um conjunto de metadados que descreve como 
 }
 \end{frame}
 \begin{frame}[fragile]
-\frametitle{Estrutura e Uso dos Ports (Continuação)}
+\frametitle{Estrutura e Uso dos Ports}
 \justifying
 Para instalar um aplicativo usando ports, você navega até a subpasta correspondente e executa \verb|make install|. Isso baixará o código-fonte do aplicativo, aplicará quaisquer patches necessários, compilará o código-fonte e instalará o aplicativo.
 \vspace{0.5cm}
@@ -141,16 +195,25 @@ Os Ports são uma parte essencial do ecossistema OpenBSD. Eles permitem que os u
 \vspace{0.5cm}
 \begin{columns}
 \begin{column}{0.3\textwidth}
+\begin{figure}
 \centering
 \includegraphics[width=0.5\textwidth]{imagens/hydra-logo.png}
+\caption{Hydra}
+\end{figure}
 \end{column}
 \begin{column}{0.3\textwidth}
+\begin{figure}
 \centering
 \includegraphics[width=0.5\textwidth]{imagens/mpv-logo.png}
+\caption{MPV}
+\end{figure}
 \end{column}
 \begin{column}{0.3\textwidth}
+\begin{figure}
 \centering
 \includegraphics[width=0.5\textwidth]{imagens/kde-logo.png}
+\caption{KDE Plasma}
+\end{figure}
 \end{column}
 \end{columns}
 \end{frame}
@@ -176,9 +239,6 @@ May 10 03:32:20 pigor ntpd[4784]: adjusting local clock by -1.162333s
 May 10 03:36:08 pigor ntpd[4784]: adjusting local clock by -1.023899s
 May 10 03:40:02 pigor ntpd[4784]: adjusting local clock by -0.902637s
 May 10 03:43:43 pigor ntpd[4784]: adjusting local clock by -0.789431s
-May 10 03:47:35 pigor ntpd[4784]: adjusting local clock by -0.679320s
-May 10 03:50:45 pigor ntpd[4784]: adjusting local clock by -0.605858s
-May 10 03:53:31 pigor ntpd[4784]: adjusting local clock by -0.529821s
 \end{lstlisting}
 \end{frame}
 \begin{frame}{Princípios do OpenBSD}
@@ -317,6 +377,74 @@ H & e & l & l & o & , & P & r & o & p & \textbf{o}                & \textbf{l}  
 \end{tabular}
 \end{table}
 \end{frame}
+\begin{frame}[fragile]
+\frametitle{Gerenciamento de Memória no OpenBSD}
+\begin{itemize}
+\justifying
+\item \textbf{Gerenciamento de memória unificado:} O OpenBSD usa um modelo de gerenciamento de memória unificado, tratando a memória física e virtual como um recurso unificado.
+
+\item \textbf{Páginas de memória:} A memória é dividida em páginas, cada uma normalmente com 4 KB. Essas, por sua vez,  podem ser atribuídas a processos, usadas para armazenamento em buffer de I/O ou mantidas como páginas livres.
+
+\item \textbf{Swapping e paging:} Quando a memória física fica baixa, o sistema pode mover páginas de memória inativas para o disco, um processo conhecido como \textit{swapping}. O OpenBSD também suporta \textit{paging}, que permite que partes de um processo sejam movidas para o disco para liberar memória.
+\end{itemize}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Gerenciamento de Memória no OpenBSD}
+\begin{itemize}
+ \item \textbf{Monitorando o uso de memória:} Os comandos \verb|top|, \verb|vmstat| e \verb|systat| podem ser usados para monitorar o uso de memória no OpenBSD.
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{imagens/screenshoot.png}
+  \caption{Comando \textbf{top} em execução}
+\end{figure}
+\end{itemize}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Gerenciamento de Processos no OpenBSD}
+\justifying
+\begin{itemize}
+\item \textbf{Iniciando processos:} Um processo é iniciado sempre que um programa é executado. Isso pode ser feito a partir da linha de comando ou como parte da inicialização do sistema.
+
+\item \textbf{Prioridade de processos:} Utiliza um agendador de processos para determinar a ordem em que os processos são executados. A prioridade de um processo pode ser ajustada usando o comando \verb|nice| ou \verb|renice|.
+
+\item \textbf{Segurança de processos:} Implementa vários mecanismos de segurança para processos, incluindo a execução de serviços em modos privilegiados mínimos e a separação de processos usando chroot ou outras técnicas de contenção.
+\end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle{Sistemas de Arquivos no OpenBSD}
+
+\begin{itemize}
+\item \textbf{FFS}$_{2}$ (\textit{Enhanced Fast File System}): Este é o sistema de arquivos padrão usado pelo OpenBSD (6.7 >). É um sistema de arquivos Unix tradicional, otimizado para desempenho e confiabilidade.
+
+\item \textbf{ext2/ext3/ext4:} Embora principalmente associados ao Linux, esses sistemas de arquivos também são suportados pelo OpenBSD, permitindo a interoperabilidade com sistemas Linux.
+
+\item \textbf{FAT (File Allocation Table):} o sistema de arquivos FAT e sua variante VFAT, comumente usados em dispositivos USB e em sistemas Windows.
+
+\item \textbf{NTFS (New Technology File System):} comumente usados em sistemas Windows mais recentes.
+
+\item \textbf{CD9660 (ISO 9660):} Este é o sistema de arquivos padrão usado para CDs e DVDs.
+
+\item \textbf{Outros sistemas de arquivos:} O OpenBSD também suporta uma variedade de outros sistemas de arquivos, incluindo UFS, NFS, SMBFS (para compartilhamentos de arquivos SMB/CIFS) e outros.
+\end{itemize}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Sistemas de Arquivos no OpenBSD}
+\begin{lstlisting}[caption=Partições padrão do OpenBSD]
+16 partitions:
+#       Size         Offset     Wfstype   [fsize bsize  cpg]
+a:      2097121      64         7.3BSD      2048 16384    1 # /
+b:      4698424      2097185    swap                        # swap
+c:      312581808    0          unused
+d:      8388576      6795617    7.3BSD      2048 16384    1 # /tmp
+e:      16736864     15184193   7.3BSD      2048 16384    1 # /var
+f:      4194304      31921057   7.3BSD      2048 16384    1 # /usr
+g:      2097152      36115361   7.3BSD      2048 16384    1 # /usr/X11R6
+h:      20971520     38212513   7.3BSD      2048 16384    1 # /usr/local
+i:      4194304      59184033   7.3BSD      2048 16384    1 # /usr/src
+j:      4194304      63378337   7.3BSD      2048 16384    1 # /usr/obj
+k:      245003968    67572641   7.3BSD      2048 16384    1 # /home
+\end{lstlisting}
+\end{frame}
 \begin{frame}{Recursos de Inovação}
   \begin{itemize}
     \item Virtualização com o VMM;
@@ -338,17 +466,18 @@ H & e & l & l & o & , & P & r & o & p & \textbf{o}                & \textbf{l}  
   \begin{itemize}
     \item OpenBSD: Segurança e Inovação;
     \item Comprometimento com a qualidade e a confiabilidade;
+    \item OpenBSD para uso doméstico;
     \item Sistema operacional confiável para diversos casos de uso.
   \end{itemize}
 \end{frame}
 \begin{frame}
   \frametitle{Bibliografia}
   \begin{itemize}
-    \item Hartmeier, Daniel, and Systor, AG. "Design and Performance of the OpenBSD Stateful Packet Filter (pf)." In USENIX Annual Technical Conference, FREENIX Track, pp. 171--180, 2002.
-    \item Marco-Gisbert, Hector, and Ripoll Ripoll, Ismael. "Address space layout randomization next generation." In Applied Sciences, vol. 9, no. 14, p. 2928, 2019.
-    \item Izurieta, Clemente, and Bieman, James. "The evolution of FreeBSD and Linux." In Proceedings of the 2006 ACM/IEEE international symposium on empirical software engineering, pp. 204--211, 2006.
-    \item Hsu, Jeffrey M. "The dragonflybsd operating system." In Proceedings USENIX AsiaBSDCon, Taipei, Taiwan, 2004.
-    \item Mewburn, Luke. "The Design and Implementation of the NetBSD rc. d System." In USENIX Annual Technical Conference, FREENIX Track, pp. 69--79, 2001.
+    \item Hartmeier, Daniel, and Systor, AG. \textbf{"Design and Performance of the OpenBSD Stateful Packet Filter (pf)."} In USENIX Annual Technical Conference, FREENIX Track, pp. 171--180, 2002.
+    \item Marco-Gisbert, Hector, and Ripoll Ripoll, Ismael. \textbf{"Address space layout randomization next generation."} In Applied Sciences, vol. 9, no. 14, p. 2928, 2019.
+    \item Izurieta, Clemente, and Bieman, James. \textbf{"The evolution of FreeBSD and Linux.}" In Proceedings of the 2006 ACM/IEEE international symposium on empirical software engineering, pp. 204--211, 2006.
+    \item Hsu, Jeffrey M. \textbf{"The dragonflybsd operating system."} In Proceedings USENIX AsiaBSDCon, Taipei, Taiwan, 2004.
+    \item Mewburn, Luke. \textbf{"The Design and Implementation of the NetBSD rc. d System."} In USENIX Annual Technical Conference, FREENIX Track, pp. 69--79, 2001.
   \end{itemize}
 \end{frame}
 \end{document}
