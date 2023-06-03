@@ -6,6 +6,7 @@
 \usepackage{xltxtra}
 \usepackage{dirtree}
 \usepackage{ragged2e}
+\usepackage{hyperref}
 \usepackage{listings}
 \usepackage{graphicx}
 \usepackage{chronology}
@@ -36,10 +37,10 @@
 }
 
 \date{20 de maio de 2023}
-\title{OpenBSD: Segurança e Inovação em SOs}
+\title{OpenBSD: Segurança e Inovação em Sistemas Operacionais}
 \institute[PUC]{Pontifícia Universidade Católica de Minas Gerais}
 \logo{\includegraphics[width=0.7cm]{imagens/logo_pucminas.png}}
-\author[Gustavo Valadares, Hernane Rosa, João Víctor, Pedro Igor]{Gustavo Valadares \and Hernane Rosa \and João Martins \and Pedro Igor}
+\author[Gustavo Valadares, Hernane Velozo, João Víctor, Pedro Igor]{Gustavo Valadares \and Hernane Velozo \and João Víctor \and Pedro Igor}
 
 \begin{document}
 
@@ -47,11 +48,22 @@
   \titlepage
 \end{frame}
 \begin{frame}{Introdução}
-  \begin{itemize}
-    \item O que é o OpenBSD?
-    \item Breve histórico do projeto;
-    \item Objetivos do OpenBSD.
-  \end{itemize}
+  \begin{columns}
+    \begin{column}{0.4\textwidth}
+      \begin{itemize}
+        \item O que é o OpenBSD?
+        \item Breve histórico do projeto;
+        \item Objetivos do OpenBSD.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.7\textwidth}
+      \begin{figure}
+        \centering
+        \includegraphics[width=0.7\textwidth]{imagens/openbsd-logo.png}
+        \caption{Logo oficial do OpenBSD}
+      \end{figure}
+    \end{column}
+  \end{columns}
 \end{frame}
 \begin{frame}{O que é o OpenBSD?}
   \begin{itemize}
@@ -479,5 +491,12 @@ k:      245003968    67572641   7.3BSD      2048 16384    1 # /home
     \item Hsu, Jeffrey M. \textbf{"The dragonflybsd operating system."} In Proceedings USENIX AsiaBSDCon, Taipei, Taiwan, 2004.
     \item Mewburn, Luke. \textbf{"The Design and Implementation of the NetBSD rc. d System."} In USENIX Annual Technical Conference, FREENIX Track, pp. 69--79, 2001.
   \end{itemize}
+\end{frame}
+\begin{frame}
+\begin{figure}
+\centering
+\includegraphics[width=0.6\textwidth]{imagens/frame.png}
+\caption{Repositório no \href{https://github.com/pigor12/latex-openbsd}{Github}}
+\end{figure}
 \end{frame}
 \end{document}
