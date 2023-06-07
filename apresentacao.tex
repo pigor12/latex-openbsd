@@ -1,6 +1,5 @@
 \documentclass[9pt,xcolor=table]{beamer}
 \usetheme{Warsaw}
-
 \usepackage{tikz}
 \usepackage{xcolor}
 \usepackage{xltxtra}
@@ -11,7 +10,6 @@
 \usepackage{graphicx}
 \usepackage{chronology}
 \usetikzlibrary{shapes, arrows}
-
 \lstset{
     language=Bash,
     backgroundcolor=\color{black!5},
@@ -35,15 +33,12 @@
     escapeinside={\%*}{*)},
     morekeywords={*,...}
 }
-
 \date{20 de maio de 2023}
 \title{OpenBSD: Segurança e Inovação em Sistemas Operacionais}
 \institute[PUC]{Pontifícia Universidade Católica de Minas Gerais}
 \logo{\includegraphics[width=0.7cm]{imagens/logo_pucminas.png}}
 \author[Gustavo Valadares, Hernane Velozo, João Víctor, Pedro Igor]{Gustavo Valadares \and Hernane Velozo \and João Víctor \and Pedro Igor}
-
 \begin{document}
-
 \begin{frame}
   \titlepage
 \end{frame}
@@ -104,13 +99,11 @@
 \begin{figure}
 \centering
 \begin{tikzpicture}[node distance = 3cm, auto]
-
 \tikzstyle{startstop} = [rectangle, rounded corners, text centered, draw=black, fill=orange!30]
 \tikzstyle{process} = [rectangle, text centered, draw=black, fill=blue!20]
 \tikzstyle{decision} = [diamond, text centered, draw=black, fill=green!30]
 \tikzstyle{error} = [trapezium, draw, text centered, trapezium left angle=60, trapezium right angle=120, fill=red!10]
 \tikzstyle{arrow} = [thick,->,>=stealth]
-
 \node (start) [startstop] {ISO};
 \node (media) [process, right of=start] {Mídia USB};
 \node (boot) [decision, below of=media] {Boot};
@@ -118,7 +111,6 @@
 \node (config) [process, left of=inst] {Configuração};
 \node (finish) [process, above of=config] {Fim};
 \node (erro) [error, below of=boot] {Erro};
-
 \draw [arrow] (start) -- (media);
 \draw [arrow] (media) -- (boot);
 \draw [arrow] (config) -- (finish);
@@ -153,7 +145,6 @@ root@openbsd > $ id pigor                       # Imprimir informações.
 root@openbsd > $ userdel pigor                  # Remoção
 \end{lstlisting}
 \end{frame}
-
 \begin{frame}[fragile]
 \frametitle{Introdução ao OpenBSD Ports}
 \justifying
@@ -498,5 +489,37 @@ k:      245003968    67572641   7.3BSD      2048 16384    1 # /home
 \includegraphics[width=0.6\textwidth]{imagens/frame.png}
 \caption{Repositório no \href{https://github.com/pigor12/latex-openbsd}{Github}}
 \end{figure}
+\end{frame}
+\begin{frame}[fragile]
+  \frametitle{Questão adicional}
+  \justifying
+  Você é um administrador de sistemas que está configurando um novo servidor OpenBSD. Para adicionar um novo usuário ao sistema e atribuir a ele um diretório home, você decide usar o comando useradd. Qual dos seguintes comandos você usaria para adicionar o usuário "bob" e atribuir a ele um diretório home?
+  \begin{enumerate}
+  \item \verb|useradd bob|
+  \item \verb|useradd -m bob|
+  \item \verb|useradd -d /home/bob bob|
+  \item \verb|usermod -m bob|
+  \item \verb|userdel bob|
+  \end{enumerate}
+\end{frame}
+\begin{frame}[fragile]
+  \frametitle{Questão adicional}
+  \begin{enumerate}
+  \item \verb|useradd bob|
+
+    \textbf{Incorreta.} Este comando adiciona um novo usuário chamado "bob", mas não cria automaticamente um diretório home para o usuário.
+  \item \textcolor{teal}{useradd -m bob}
+
+    \textbf{Correta.} Este comando adiciona um novo usuário chamado "bob" e usa a opção "-m" para criar um diretório home para o usuário. Portanto, essa resposta está correta.
+  \item \verb|useradd -d /home/bob bob|
+
+    \textbf{Incorreta.} Este comando adiciona um novo usuário chamado "bob" e usa a opção "-d" para especificar o diretório home do usuário. No entanto, esse comando não cria automaticamente o diretório home, então, a menos que o diretório \verb|/home/bob| já exista, essa resposta está incorreta.
+  \item \verb|usermod -m bob|
+
+    \textbf{Incorreta.} O comando \verb|usermod| é usado para modificar um usuário existente, não para adicionar um novo usuário. 
+  \item \verb|userdel bob|
+
+    \textbf{Incorreta.} O comando \verb|userdel| é usado para remover um usuário, não para adicionar um novo usuário.
+  \end{enumerate}  
 \end{frame}
 \end{document}
